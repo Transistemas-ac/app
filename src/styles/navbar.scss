@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  height: 60px;
+  height: 80px;
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -8,37 +8,45 @@
   width: 100%;
 
   .left,
-  .right {
+  .right,
+  .center {
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .svg {
+    cursor: pointer;
   }
 
   .center {
+    height: 100%;
+    width: 70px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .svg {
-    cursor: pointer;
-    height: 30px;
-    width: 30px;
-  }
-
   .logo {
-    height: 16px;
+    height: 18px;
     margin-left: 20px;
-    margin-top: 5px;
-    width: auto;
   }
 
   .cat {
     height: 50px;
     width: 60px;
+    padding-top: 15px;
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
   .power {
@@ -56,21 +64,14 @@
 
 @media (max-width: 600px) {
   .navbar {
-    height: 70px;
-
     .logo {
-      margin-left: 0;
+      height: 14px;
+      margin-left: 10px;
     }
 
     .cat {
-      top: 15px;
       height: 40px;
       width: 48px;
-      margin-left: 1rem;
-    }
-
-    .power {
-      margin-right: 1rem;
     }
   }
 }

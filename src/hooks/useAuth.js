@@ -62,5 +62,5 @@ export function useAuth(user, setUser, setAuthLoading) {
     };
 
     refresh();
-  }, [user.id, setUser, setAuthLoading]);
+  }, [user?.id, setUser, setAuthLoading]);
 }

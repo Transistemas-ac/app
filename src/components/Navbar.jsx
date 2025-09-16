@@ -1,28 +1,40 @@
-import { API_URL } from "../util/constants";
+import { useNavigate } from "react-router-dom";
+import { LANDING_URL } from "../util/constants";
 import Logo from "../assets/logo.svg";
 import Cat from "../assets/cat.svg";
 import Power from "../assets/power.svg";
 import User from "../assets/user.svg";
 import "../styles/navbar.scss";
 
-function Navbar() {
+function Navbar({ setUser }) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(undefined);
+    navigate("/login");
+  };
+
   return (
     <div className="navbar">
       <div className="left">
-        <a href="/">
+        <a href={LANDING_URL}>
           <img src={Logo} alt="Logo" className="svg logo" />
         </a>
       </div>
       <div className="center" />
-      <a href={API_URL}>
+      <a href="/">
         <img src={Cat} alt="Cat" className="svg cat" />
       </a>
       <div className="right">
-        <a href="/logout">
+        <button onClick={handleLogout}>
           <img src={Power} alt="Power" className="svg power" />
-        </a>
-        <a href={`/user/${localStorage.getItem("user_id")}`} />
-        <img src={User} alt="User" className="svg user" />
+        </button>
+        {localStorage.getItem("user") && (
+          <a href={`/user/${JSON.parse(localStorage.getItem("user")).id}`}>
+            <img src={User} alt="User" className="svg user" />
+          </a>
+        )}
       </div>
     </div>
   );
