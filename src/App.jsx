@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
-import Home from "./views/Home/Home";
-import Login from "./views/Auth/Login";
-import Register from "./views/Auth/Register";
-import DEFAULT_USER from "./util/constants";
-import "./App.css";
+import { DEFAULT_USER } from "./util/constants";
+import Home from "./views/Home";
+import Login from "./views/Login";
+import Register from "./views/Register";
+import Course from "./views/Course";
+import User from "./views/User";
+import "./App.scss";
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -22,13 +24,20 @@ function App() {
         <div className="loading">Loading...</div>
       ) : (
         <Routes>
+          <Route path="*" element={<Navigate to="/" />} />
           <Route
             path="/"
             element={
+              user.loggedIn ? <Navigate to="/home" /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/home"
+            element={
               user.loggedIn ? (
-                <Navigate to="/home" element={<Home />} />
+                <Home user={user} setUser={setUser} />
               ) : (
-                <Navigate to="/login" element={<Login />} />
+                <Navigate to="/login" />
               )
             }
           />
@@ -42,18 +51,28 @@ function App() {
               )
             }
           />
-          <Route parh="/register" element={<Register setUser={setUser} />} />
           <Route
-            path="/home"
+            path="/register"
             element={
               user.loggedIn ? (
-                <Home user={user} setUser={setUser} />
+                <Navigate to="/home" />
               ) : (
-                <Navigate to="/login" />
+                <Register setUser={setUser} />
               )
             }
           />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route
+            path="/course/:courseId"
+            element={
+              user.loggedIn ? <Course user={user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/user/:userId"
+            element={
+              user.loggedIn ? <User user={user} /> : <Navigate to="/login" />
+            }
+          />
         </Routes>
       )}
     </main>

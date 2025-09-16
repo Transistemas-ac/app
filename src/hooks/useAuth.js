@@ -1,5 +1,5 @@
-import { API_URL } from "../util/api";
 import { useEffect } from "react";
+import { API_URL } from "../util/constants";
 
 const refreshUserData = async (userId, setUser) => {
   try {

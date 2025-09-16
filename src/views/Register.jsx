@@ -1,5 +1,5 @@
-import Navbar from "../../components/Navbar";
-import "../../styles/auth.scss";
+import Navbar from "../components/Navbar";
+import "../styles/auth.scss";
 
 const Register = () => {
   return (
