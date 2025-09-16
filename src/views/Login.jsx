@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../util/constants";
+import Cat from "../assets/cat.svg";
 import "../styles/auth.scss";
 
 const Login = ({ setUser }) => {
@@ -59,6 +60,9 @@ const Login = ({ setUser }) => {
 
   return (
     <div className="login">
+      <div className="cat-container">
+        <img src={Cat} alt="Cat" className="svg cat" />
+      </div>
       <h1>Bienvenidx</h1>
       <form>
         <input
