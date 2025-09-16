@@ -13,10 +13,14 @@
   font-family: "Work Sans", sans-serif;
   justify-content: center;
 
+  .rainbow {
+    height: 70px;
+    margin-bottom: 20px;
+  }
+
   .cat-container {
     display: flex;
     margin-bottom: 1rem;
-    margin-top: 20px;
 
     .cat {
       height: 80px;
@@ -29,6 +33,7 @@
     color: $white;
     margin-top: 0px;
     margin-bottom: 2rem;
+    text-align: center;
   }
 
   form {
@@ -111,13 +116,13 @@
 
 @media (max-width: 480px) {
   .login {
+    .rainbow {
+      margin-top: 20px;
+    }
     .cat-container {
       .cat {
         height: 100px;
       }
-    }
-    h1 {
-      font-size: 3rem;
     }
     form {
       max-width: 300px;

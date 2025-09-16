@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../util/constants";
-import Cat from "../assets/cat.svg";
+import Cat from "../assets/cat.png";
 import "../styles/auth.scss";
 
 const Login = ({ setUser }) => {

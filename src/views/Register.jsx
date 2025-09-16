@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../util/constants";
+import TransRainbow from "../assets/trans_rainbow.png";
 import "../styles/auth.scss";
 
 const Register = ({ setUser }) => {
@@ -74,7 +75,8 @@ const Register = ({ setUser }) => {
 
   return (
     <div className="login">
-      <h1>Bienvenidx</h1>
+      <img src={TransRainbow} className="rainbow" alt="Arcoiris" />
+      <h1>Sumate a Transistemas</h1>
       <form>
         <input
           name="username"
