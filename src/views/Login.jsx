@@ -63,7 +63,7 @@ const Login = ({ setUser }) => {
       <div className="cat-container">
         <img src={Cat} alt="Cat" className="svg cat" />
       </div>
-      <h1>Bienvenidx</h1>
+      <h1>Bienvenide</h1>
       <form>
         <input
           value={username}

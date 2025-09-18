@@ -44,20 +44,24 @@ const refreshUserData = async (userId, setUser) => {
 export function useAuth(user, setUser, setAuthLoading) {
   useEffect(() => {
     const refresh = async () => {
-      setAuthLoading(true); // 🕒 auth in progress
+      setAuthLoading(true);
 
       try {
-        if (user?.id) {
-          await refreshUserData(user.id, setUser);
-        } else {
+        let userId = user?.id;
+
+        if (!userId) {
           const storedUser = localStorage.getItem("user");
           if (storedUser) {
             const userData = JSON.parse(storedUser);
-            await refreshUserData(userData.id, setUser);
+            userId = userData?.id;
           }
         }
+
+        if (userId) {
+          await refreshUserData(userId, setUser);
+        }
       } finally {
-        setAuthLoading(false); // ✅ done
+        setAuthLoading(false);
       }
     };
 
