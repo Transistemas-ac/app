@@ -86,7 +86,6 @@ function UserList() {
           </span>
         </div>
       </div>
-
       <div className="list-content">
         {users.length === 0 ? (
           <div className="empty-state">
