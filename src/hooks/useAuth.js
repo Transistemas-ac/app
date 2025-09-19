@@ -25,7 +25,7 @@ const refreshUserData = async (userId, setUser) => {
       link,
       team,
       subscriptions,
-    } = data.user;
+    } = data;
 
     if (!response.ok) {
       console.error("Error refreshing user data:", data.error);
@@ -47,8 +47,6 @@ const refreshUserData = async (userId, setUser) => {
       subscriptions,
       loggedIn: true,
     };
-
-    console.log("Refreshed user data:", userData);
 
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));

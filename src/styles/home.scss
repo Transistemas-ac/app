@@ -559,43 +559,6 @@
   }
 }
 
-@media (max-width: 1200px) {
-  .home-container {
-    padding: 1.5rem;
-  }
-
-  .main-content {
-    gap: 1.5rem;
-  }
-
-  .list-header {
-    padding: 1.25rem 1.5rem;
-  }
-
-  .list-item {
-    padding: 1.25rem 1.5rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .top-section {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .section {
-    min-height: 400px;
-  }
-
-  .list-content.scrollable {
-    max-height: 300px;
-  }
-
-  .bottom-section {
-    height: 50vh;
-  }
-}
-
 @media (max-width: 768px) {
   .home-container {
     padding: 1rem;
