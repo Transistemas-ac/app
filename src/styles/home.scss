@@ -1,61 +1,5 @@
-// 🎨 Colors - Dark Theme
-$pink: #fe98cc;
-$blue: #54b4f0;
-$yellow: #fecc01;
-$white: #fefffe;
-$purple: #8e53bc;
-$black: #1a1b1b;
-
-// Dark theme colors
-$dark-background: #1b1b1a;
-$dark-card: #2a2a29;
-$dark-card-hover: #323231;
-$white-text: #fefffe;
-$gray-text: #b8b8b7;
-$gray-light-dark: #3a3a39;
-$gray-medium-dark: #6a6a69;
-$gray-dark-theme: #8a8a89;
-
-// Additional utility colors
-$success: #10b981;
-$danger: #ef4444;
-$shadow-dark: rgba(0, 0, 0, 0.3);
-$shadow-hover-dark: rgba(0, 0, 0, 0.5);
-
-// Fonts
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
-
-// Mixins
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-@mixin transition($property: all, $duration: 0.3s, $ease: ease-in-out) {
-  transition: $property $duration $ease;
-}
-
-@mixin card-shadow {
-  box-shadow: 0 4px 20px $shadow-dark;
-}
-
-@mixin card-shadow-hover {
-  box-shadow: 0 8px 30px $shadow-hover-dark;
-}
-
-// Base styles
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@use "./vars" as *;
+@use "sass:color";
 
 .home-container {
   min-height: 100vh;
@@ -99,7 +43,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
 }
 
 .section {
-  background: $dark-card;
   border-radius: 20px;
   overflow: hidden;
   @include transition();
@@ -125,7 +68,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-// List container styles
 .list-container {
   height: 100%;
   display: flex;
@@ -159,23 +101,17 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   @include flex-between;
   margin-bottom: 0.5rem;
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: $white-text;
-    margin: 0;
-  }
-}
+  .header-title-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 
-.header-stats {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-
-  .stat-item {
-    font-size: 0.875rem;
-    color: $gray-text;
-    font-weight: 500;
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $white-text;
+      margin: 0;
+    }
   }
 }
 
@@ -189,15 +125,60 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   &.pink {
     background: $pink;
   }
+
   &.blue {
     background: $blue;
   }
+
   &.yellow {
     background: $yellow;
     color: $black;
   }
+
   &.purple {
     background: $purple;
+  }
+}
+
+.add-btn-header {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  @include transition();
+  @include flex-center;
+  color: $white-text;
+
+  &.pink {
+    background: $pink;
+    &:hover {
+      background: color.adjust($pink, $lightness: 10%);
+      transform: scale(1.1);
+    }
+  }
+
+  &.blue {
+    background: $blue;
+    &:hover {
+      background: color.adjust($blue, $lightness: 10%);
+      transform: scale(1.1);
+    }
+  }
+
+  &.yellow {
+    background: $yellow;
+    color: $black;
+    &:hover {
+      background: color.adjust($yellow, $lightness: 10%);
+      transform: scale(1.1);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
 
@@ -228,7 +209,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-// Loading styles
 .loading-container {
   @include flex-center;
   flex-direction: column;
@@ -252,12 +232,15 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   &.pink {
     border-top: 4px solid $pink;
   }
+
   &.blue {
     border-top: 4px solid $blue;
   }
+
   &.yellow {
     border-top: 4px solid $yellow;
   }
+
   &.purple {
     border-top: 4px solid $purple;
   }
@@ -272,7 +255,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-// Empty state
 .empty-state {
   @include flex-center;
   flex-direction: column;
@@ -291,7 +273,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-// List items
 .item-list {
   list-style: none;
   padding: 0;
@@ -304,6 +285,7 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   padding: 1.5rem 2rem;
   border-bottom: 1px solid rgba($gray-light-dark, 0.8);
   @include transition();
+  animation: fadeIn 0.3s ease-out;
 
   &:last-child {
     border-bottom: none;
@@ -325,7 +307,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-// Avatar styles
 .item-avatar {
   width: 50px;
   height: 50px;
@@ -347,13 +328,16 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   &.pink {
     background: $pink;
   }
+
   &.blue {
     background: $blue;
   }
+
   &.yellow {
     background: $yellow;
     color: $black;
   }
+
   &.purple {
     background: $purple;
   }
@@ -364,7 +348,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-// Item info
 .item-info {
   flex: 1;
   display: flex;
@@ -373,7 +356,7 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
 }
 
 .item-header {
-  @include flex-between;
+  display: flex;
   align-items: flex-start;
   margin-bottom: 0.25rem;
 }
@@ -385,102 +368,71 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   line-height: 1.3;
 }
 
+.item-id {
+  font-size: 0.85rem;
+  color: $gray-text;
+  background: rgba($gray-light-dark, 0.6);
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  margin-top: 0.25rem;
+  width: 50px;
+}
+
 .item-detail {
   font-size: 0.9rem;
   color: $gray-text;
   line-height: 1.4;
 }
 
-// Course specific styles
-.course-description {
-  color: $gray-dark-theme;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0.5rem 0;
-  max-width: 500px;
-}
-
-.course-dates {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin: 0.5rem 0;
-
-  .date-info {
-    font-size: 0.85rem;
-    color: $gray-text;
-    font-weight: 500;
-  }
-}
-
-.course-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-
-  .course-link {
-    font-size: 0.85rem;
-    color: $blue;
-    text-decoration: none;
-    font-weight: 500;
-    @include transition();
-
-    &:hover {
-      color: lighten($blue, 15%);
-      text-decoration: underline;
-    }
-  }
-}
-
-// Badges
-.credential-badge {
-  padding: 0.25rem 0.75rem;
+.credential-badge,
+.status-badge {
+  padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: capitalize;
   color: $white-text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
 
   &.blue {
     background: $blue;
   }
+
   &.purple {
     background: $purple;
   }
-}
-
-.status-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  color: $white-text;
 
   &.pink {
     background: $pink;
   }
-  &.blue {
-    background: $blue;
-  }
+
   &.yellow {
     background: $yellow;
     color: $black;
   }
-  &.purple {
-    background: $purple;
+
+  &.red {
+    background: $danger;
+  }
+
+  &.green {
+    background: $success;
   }
 }
 
-// Action buttons
 .item-actions {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.action-btn {
+.action-btn,
+.add-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 20px;
@@ -492,13 +444,16 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.25rem;
+  text-align: center;
 
   &.pink {
     background: $pink;
     color: $white-text;
+
     &:hover {
-      background: lighten($pink, 10%);
+      background: color.adjust($pink, $lightness: 10%);
       transform: translateY(-2px);
     }
   }
@@ -506,17 +461,29 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   &.blue {
     background: $blue;
     color: $white-text;
+
     &:hover {
-      background: lighten($blue, 10%);
+      background: color.adjust($blue, $lightness: 10%);
       transform: translateY(-2px);
     }
   }
 
   &.yellow {
     background: $yellow;
-    color: $black;
+    color: $white;
+
     &:hover {
-      background: lighten($yellow, 10%);
+      background: color.adjust($yellow, $lightness: 10%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &.red {
+    background: $danger;
+    color: $white-text;
+
+    &:hover {
+      background: color.adjust($danger, $lightness: 10%);
       transform: translateY(-2px);
     }
   }
@@ -524,9 +491,14 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   &.purple {
     background: $purple;
     color: $white-text;
+
     &:hover {
-      background: lighten($purple, 10%);
+      background: color.adjust($purple, $lightness: 10%);
       transform: translateY(-2px);
+    }
+
+    &:active {
+      background: color.adjust($purple, $lightness: 5%);
     }
   }
 
@@ -534,19 +506,11 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
     background: transparent;
     color: $gray-dark-theme;
     border: 2px solid $gray-medium-dark;
+
     &:hover {
       background: $gray-light-dark;
       border-color: $gray-dark-theme;
       transform: translateY(-2px);
-    }
-
-    &.danger {
-      color: $danger;
-      border-color: $danger;
-      &:hover {
-        background: rgba($danger, 0.1);
-        border-color: lighten($danger, 10%);
-      }
     }
   }
 
@@ -555,45 +519,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-.add-btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  @include transition();
-  font-family: "Work Sans", sans-serif;
-
-  &.pink {
-    background: $pink;
-    color: $white-text;
-    &:hover {
-      background: lighten($pink, 10%);
-      transform: translateY(-2px);
-    }
-  }
-
-  &.blue {
-    background: $blue;
-    color: $white-text;
-    &:hover {
-      background: lighten($blue, 10%);
-      transform: translateY(-2px);
-    }
-  }
-
-  &.yellow {
-    background: $yellow;
-    color: $black;
-    &:hover {
-      background: lighten($yellow, 10%);
-      transform: translateY(-2px);
-    }
-  }
-}
-
-// Subscription specific styles
 .subscription-groups {
   padding: 0 1rem 1rem;
 }
@@ -607,16 +532,21 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
 }
 
 .group-header {
-  @include flex-between;
   padding: 1rem 1rem 0.5rem;
   border-bottom: 2px solid $gray-light-dark;
   margin-bottom: 0.5rem;
 
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: $white-text;
-    margin: 0;
+  .group-title-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $white-text;
+      margin: 0;
+    }
   }
 
   .group-count {
@@ -629,49 +559,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 }
 
-.subscription-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-
-  .enrollment-info {
-    .enrollment-id {
-      font-size: 0.75rem;
-      color: $gray-text;
-      font-family: "Courier New", monospace;
-      background: $gray-light-dark;
-      padding: 0.25rem 0.5rem;
-      border-radius: 8px;
-    }
-  }
-}
-
-// Additional loading styles for better dark theme support
-.loading-container {
-  @include flex-center;
-  height: 100%;
-  width: 100%;
-}
-
-.empty-state-icon {
-  font-size: 3rem;
-  color: $gray-text;
-}
-
-.empty-state-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: $white-text;
-}
-
-.empty-state-message {
-  font-size: 1rem;
-  text-align: center;
-  color: $gray-text;
-}
-
-// Responsive design
 @media (max-width: 1200px) {
   .home-container {
     padding: 1.5rem;
@@ -723,18 +610,12 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
   }
 
   .header-content {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 0.5rem;
-  }
 
-  .header-stats {
-    flex-direction: column;
-    gap: 0.25rem;
-    width: 100%;
-
-    .stat-item {
-      font-size: 0.8rem;
+    .header-title-section {
+      flex: 1;
     }
   }
 
@@ -742,140 +623,6 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
     padding: 1rem 1.25rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
-
-    &:hover {
-      transform: none;
-    }
-
-    &.course-item {
-      .item-info {
-        order: 1;
-      }
-
-      .item-actions {
-        order: 2;
-        align-self: flex-end;
-      }
-    }
-  }
-
-  .item-avatar {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 0;
-  }
-
-  .item-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .item-actions {
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: 0.5rem;
-
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .subscription-actions {
-    width: 100%;
-    align-items: flex-start;
-  }
-
-  .course-dates {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .course-links {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .group-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-
-    .group-count {
-      align-self: flex-end;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .item-avatar {
-    width: 35px;
-    height: 35px;
-    font-size: 0.9rem;
-  }
-
-  .action-btn,
-  .add-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-
-  .list-content.scrollable {
-    max-height: 250px;
-  }
-}
-
-// Animations
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.list-item {
-  animation: fadeIn 0.3s ease-out;
-}
-
-// Print styles (adjusted for dark theme)
-@media print {
-  .home-container {
-    background: $white;
-    color: $black;
-    padding: 1rem;
-  }
-
-  .section {
-    background: $white;
-    box-shadow: none;
-    border: 1px solid $gray-medium-dark;
-    margin-bottom: 1rem;
-    break-inside: avoid;
-  }
-
-  .action-btn,
-  .add-btn {
-    display: none;
-  }
-
-  .list-content {
-    overflow: visible;
-    max-height: none;
-  }
-
-  .item-name,
-  .empty-state-title {
-    color: $black;
-  }
-
-  .item-detail,
-  .empty-state-message {
-    color: $gray-medium-dark;
+    gap: 0.75rem;
   }
 }

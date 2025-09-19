@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { LANDING_URL } from "../util/constants";
 import Logo from "../assets/logo.svg";
 import Power from "../assets/power.svg?react";
 import User from "../assets/user.svg?react";
@@ -17,16 +16,11 @@ function Navbar({ setUser }) {
   return (
     <div className="navbar">
       <div className="left">
-        <a href={LANDING_URL}>
+        <a href={"/"}>
           <img src={Logo} alt="Logo" className="svg logo" />
         </a>
       </div>
       <div className="right">
-        {localStorage.getItem("user") && (
-          <a href={`/user/${JSON.parse(localStorage.getItem("user")).id}`}>
-            <User alt="User" className="svg user" />
-          </a>
-        )}
         <button onClick={handleLogout}>
           <Power alt="Logout" className="svg power" />
         </button>

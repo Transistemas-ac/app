@@ -2,8 +2,8 @@ import { useState } from "react";
 import useFetchSubscriptions from "../hooks/useFetchSubscriptions";
 
 function SubscriptionList() {
-  const [subscriptionsLoading, setSubscriptionsLoading] = useState(true);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [subscriptionsLoading, setSubscriptionsLoading] = useState(true);
 
   useFetchSubscriptions(setSubscriptions, setSubscriptionsLoading);
 
@@ -18,10 +18,6 @@ function SubscriptionList() {
 
   const getCredentialColor = (credentials) => {
     return credentials === "teacher" ? "purple" : "blue";
-  };
-
-  const getCredentialIcon = (credentials) => {
-    return credentials === "teacher" ? "🎓" : "📚";
   };
 
   const getInitials = (user) => {
@@ -53,23 +49,14 @@ function SubscriptionList() {
     <div className="list-container subscription-list">
       <div className="list-header yellow-header">
         <div className="header-content">
-          <h2>⭐ Inscripciones</h2>
-          <span className="count-badge yellow">{subscriptions.length}</span>
-        </div>
-        <div className="header-stats">
-          <span className="stat-item">
-            Profes:{" "}
-            {subscriptions.filter((s) => s.credentials === "teacher").length}
-          </span>
-          <span className="stat-item">
-            Estudiantes:{" "}
-            {subscriptions.filter((s) => s.credentials === "student").length}
-          </span>
-          <span className="stat-item">
-            Courses: {Object.keys(groupedSubscriptions).length}
-          </span>
+          <div className="header-title-section">
+            <h2>⭐ Inscripciones</h2>
+            <span className="count-badge yellow">{subscriptions.length}</span>
+          </div>
+          <button className="add-btn-header yellow">+</button>
         </div>
       </div>
+
       <div className="list-content scrollable">
         {subscriptions.length === 0 ? (
           <div className="empty-state">
@@ -83,10 +70,12 @@ function SubscriptionList() {
               ([courseTitle, courseSubscriptions]) => (
                 <div key={courseTitle} className="subscription-group">
                   <div className="group-header">
-                    <h3>📚 {courseTitle}</h3>
-                    <span className="group-count">
-                      {courseSubscriptions.length} inscrites
-                    </span>
+                    <div className="group-title-section">
+                      <h3>📚 {courseTitle}</h3>
+                      <span className="group-count">
+                        {courseSubscriptions.length}
+                      </span>
+                    </div>
                   </div>
                   <ul className="item-list">
                     {courseSubscriptions.map((subscription) => (
@@ -118,8 +107,12 @@ function SubscriptionList() {
                                 subscription.credentials
                               )}`}
                             >
-                              {getCredentialIcon(subscription.credentials)}{" "}
-                              {subscription.credentials}
+                              {subscription.credentials === "teacher"
+                                ? "🎓"
+                                : "📚"}{" "}
+                              {subscription.credentials === "teacher"
+                                ? "Profe"
+                                : "Estudiante"}
                             </span>
                           </div>
                           <span className="item-detail">
@@ -127,29 +120,21 @@ function SubscriptionList() {
                           </span>
                           {subscription.user?.email && (
                             <span className="item-detail">
-                              📧 {subscription.user.email}
+                              {subscription.user.email}
                             </span>
                           )}
                           {subscription.user?.team && (
                             <span className="item-detail">
-                              🏢 {subscription.user.team}
+                              {subscription.user.team}
                             </span>
                           )}
                         </div>
                         <div className="subscription-actions">
-                          <div className="enrollment-info">
-                            <span className="enrollment-id">
-                              ID: {subscription.user_id}-
-                              {subscription.course_id}
-                            </span>
-                          </div>
                           <div className="item-actions">
                             <button className="action-btn yellow">
                               Editar
                             </button>
-                            <button className="action-btn outline danger">
-                              Borrar
-                            </button>
+                            <button className="action-btn red">Borrar</button>
                           </div>
                         </div>
                       </li>

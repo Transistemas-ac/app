@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFetchCourses from "../hooks/useFetchCourses";
 
 function CourseList() {
-  const [coursesLoading, setcoursesLoading] = useState(true);
   const [courses, setCourses] = useState([]);
+  const [coursesLoading, setcoursesLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(null);
+  const navigate = useNavigate();
 
   useFetchCourses(setCourses, setcoursesLoading);
 
@@ -27,40 +30,46 @@ function CourseList() {
   };
 
   const getCourseStatus = (startDate, endDate) => {
-    if (!startDate) return "draft";
-
+    if (!startDate) return "Activo";
     const now = new Date();
     const start = new Date(startDate);
     const end = endDate ? new Date(endDate) : null;
 
-    if (now < start) return "inscripciones abiertas";
-    if (end && now > end) return "completado";
-    return "activo";
+    if (now < start) return "Inscripciones Abiertas";
+    if (end && now > end) return "Completado";
+    return "Activo";
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "activo":
+      case "Activo":
+        return "green";
+      case "Inscripciones Abiertas":
         return "blue";
-      case "inscripciones abiertas":
-        return "yellow";
-      case "completado":
-        return "purple";
+      case "Completado":
+        return "red";
       default:
         return "pink";
     }
   };
 
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "activo":
-        return "▶️";
-      case "inscripciones abiertas":
-        return "⏰";
-      case "completado":
-        return "✅";
-      default:
-        return "📝";
+  const handleDeleteCourse = async (courseId) => {
+    if (window.confirm("¿Estás seguro de que quieres eliminar este curso?")) {
+      setIsDeleting(courseId);
+      try {
+        const response = await fetch(`/api/courses/${courseId}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setCourses(courses.filter((course) => course.id !== courseId));
+          console.log("✅ Error deleting course");
+        }
+      } catch (error) {
+        console.error("❌ Error deleting course:", error);
+      } finally {
+        setIsDeleting(null);
+      }
     }
   };
 
@@ -68,16 +77,30 @@ function CourseList() {
     <div className="list-container">
       <div className="list-header blue-header">
         <div className="header-content">
-          <h2>📚 Cursos</h2>
-          <span className="count-badge blue">{(courses || []).length}</span>
+          <div className="header-title-section">
+            <h2>📚 Cursos</h2>
+            <span className="count-badge blue">{(courses || []).length}</span>
+          </div>
+          <button
+            className="add-btn-header blue"
+            onClick={() => navigate("/course/new")}
+          >
+            +
+          </button>
         </div>
       </div>
+
       <div className="list-content">
         {(courses || []).length === 0 ? (
           <div className="empty-state">
             <div className="empty-icon">📖</div>
             <p>No se encontraron cursos</p>
-            <button className="add-btn blue">Crear Curso</button>
+            <button
+              className="add-btn blue"
+              onClick={() => navigate("/course/new")}
+            >
+              Crear Curso
+            </button>
           </div>
         ) : (
           <ul className="item-list">
@@ -87,18 +110,22 @@ function CourseList() {
                 course.end_date
               );
               const statusColor = getStatusColor(status);
-              const statusIcon = getStatusIcon(status);
 
               return (
-                <li key={course.id} className="list-item course-item">
+                <li
+                  key={course.id}
+                  className="list-item course-item"
+                  onClick={() => navigate(`/course/${course.id}`)}
+                >
                   <div className="item-avatar course-icon blue">📚</div>
                   <div className="item-info">
                     <div className="item-header">
                       <span className="item-name">{course.title}</span>
                       <span className={`status-badge ${statusColor}`}>
-                        {statusIcon} {status}
+                        {status}
                       </span>
                     </div>
+                    <span className="item-id">ID: {course.id}</span>
                     {course.description && (
                       <p className="course-description">{course.description}</p>
                     )}
@@ -138,8 +165,19 @@ function CourseList() {
                     </div>
                   </div>
                   <div className="item-actions">
-                    <button className="action-btn blue">Ver Detalles</button>
-                    <button className="action-btn outline">Editar</button>
+                    <button
+                      className="action-btn yellow"
+                      onClick={() => navigate(`/course/${course.id}`)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="action-btn red"
+                      onClick={() => handleDeleteCourse(course.id)}
+                      disabled={isDeleting === course.id}
+                    >
+                      Borrar
+                    </button>
                   </div>
                 </li>
               );

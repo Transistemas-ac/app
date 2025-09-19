@@ -1,15 +1,26 @@
-@import "vars";
+@use "./vars" as *;
+@use "sass:color";
 
 .navbar {
   display: flex;
-  height: 80px;
   align-items: center;
   justify-content: space-between;
+  height: 80px;
   position: fixed;
   z-index: 100;
   top: 0;
   width: 100%;
   background-color: #1b1b1a;
+
+  .svg {
+    cursor: pointer;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 
   .left,
   .right {
@@ -19,88 +30,55 @@
 
   .left {
     width: 250px;
+    margin-left: 30px;
+    .logo {
+      height: 18px;
+      width: auto;
+      margin-top: 30px;
+    }
   }
 
   .right {
-    width: 220px;
-    justify-content: flex-end;
+    width: 100px;
+    justify-content: center;
     align-items: center;
-  }
 
-  .svg {
-    cursor: pointer;
-  }
+    .power {
+      height: 45px;
+      width: 45px;
+      margin-top: 10px;
+      margin-left: 30px;
+      margin-right: 40px;
 
-  .logo {
-    height: 18px;
-    width: auto;
-    margin-top: 30px;
-    margin-left: 40px;
-  }
+      path {
+        transition: fill 0.2s ease;
+      }
 
-  button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
+      &:hover path {
+        fill: $yellow;
+      }
 
-  .user {
-    height: 50px;
-    width: 50px;
-    margin-top: 10px;
-    margin-right: auto;
-
-    path {
-      transition: fill 0.4s ease;
-    }
-
-    &:hover path {
-      fill: $blue;
-    }
-
-    &:active path {
-      fill: $pink;
-    }
-  }
-
-  .power {
-    height: 45px;
-    width: 45px;
-    margin-top: 10px;
-    margin-left: 30px;
-    margin-right: 40px;
-
-    path {
-      transition: fill 0.2s ease;
-    }
-
-    &:hover path {
-      fill: $yellow;
-    }
-
-    &:active path {
-      fill: $purple;
+      &:active path {
+        fill: $purple;
+      }
     }
   }
 }
 
 @media (max-width: 600px) {
   .navbar {
-    .logo {
-      height: 20px;
-      margin-top: 35px;
-      margin-left: 15px;
+    .left {
+      margin-left: 10px;
+      .logo {
+        scale: 1.1;
+        margin-top: 35px;
+        margin-left: 15px;
+      }
     }
 
-    .right {
-      .user {
-        scale: 1.2;
-      }
-
-      .power {
-        margin-right: 20px;
-        scale: 1.2;
-      }
+    .power {
+      scale: 1.2;
+      margin-right: 20px;
     }
   }
 }

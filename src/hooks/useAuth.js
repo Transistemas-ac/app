@@ -12,6 +12,20 @@ const refreshUserData = async (userId, setUser) => {
     });
 
     const data = await response.json();
+    const {
+      id,
+      username,
+      email,
+      credentials,
+      pronouns,
+      first_name,
+      last_name,
+      description,
+      photo_url,
+      link,
+      team,
+      subscriptions,
+    } = data.user;
 
     if (!response.ok) {
       console.error("Error refreshing user data:", data.error);
@@ -19,20 +33,22 @@ const refreshUserData = async (userId, setUser) => {
     }
 
     const userData = {
-      id: data.id,
-      username: data.username,
-      email: data.email,
-      credentials: data.credentials,
-      pronouns: data.pronouns,
-      first_name: data.first_name,
-      last_name: data.last_name,
-      description: data.description,
-      photo_url: data.photo_url,
-      link: data.link,
-      team: data.team,
-      subscriptions: data.subscriptions,
+      id,
+      username,
+      email,
+      credentials,
+      pronouns,
+      first_name,
+      last_name,
+      description,
+      photo_url,
+      link,
+      team,
+      subscriptions,
       loggedIn: true,
     };
+
+    console.log("Refreshed user data:", userData);
 
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
