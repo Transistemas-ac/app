@@ -83,6 +83,7 @@
 .list-header {
   padding: 1.5rem 2rem;
   border-bottom: 2px solid $gray-light-dark;
+  cursor: pointer;
 
   &.pink-header {
     background: linear-gradient(135deg, rgba($pink, 0.2), rgba($pink, 0.1));
@@ -116,8 +117,23 @@
 }
 
 .header-stats {
+  margin-top: 15px;
+
   .stat-item {
     margin-right: 20px;
+    border: 2px solid;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+  }
+
+  .profe {
+    border: 2px solid $purple;
+    color: color.adjust($purple, $lightness: 30%);
+  }
+
+  .estudiante {
+    border: 2px solid $blue;
+    color: color.adjust($blue, $lightness: 20%);
   }
 }
 
@@ -153,7 +169,6 @@
   border-radius: 50%;
   font-size: 1.5rem;
   font-weight: bold;
-  cursor: pointer;
   @include transition();
   @include flex-center;
   color: $white-text;

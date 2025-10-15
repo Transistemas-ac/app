@@ -52,3 +52,9 @@ $shadow-hover-dark: rgba(0, 0, 0, 0.5);
 
 // Fonts
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@font-face {
+  font-family: "Robot Crush";
+  src: url("/fonts/Robot Crush.ttf") format("truetype");
+  font-display: swap;
+}

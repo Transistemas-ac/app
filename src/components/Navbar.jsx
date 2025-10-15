@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import Power from "../assets/power.svg?react";
-import User from "../assets/user.svg?react";
 import "../styles/navbar.scss";
 
 function Navbar({ setUser }) {
@@ -13,11 +12,16 @@ function Navbar({ setUser }) {
     navigate("/login");
   };
 
+  // Función para envolver cada letra en un span
+  const wrapLetters = (text) => {
+    return text.split("").map((char, index) => <span key={index}>{char}</span>);
+  };
+
   return (
     <div className="navbar">
       <div className="left">
         <a href={"/"}>
-          <img src={Logo} alt="Logo" className="svg logo" />
+          <p>{wrapLetters("<Transistemas>")}</p>
         </a>
       </div>
       <div className="right">

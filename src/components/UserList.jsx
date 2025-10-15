@@ -63,7 +63,10 @@ function UserList() {
 
   return (
     <div className="list-container">
-      <div className="list-header pink-header">
+      <div
+        className="list-header pink-header"
+        onClick={() => navigate("/users")}
+      >
         <div className="header-content">
           <div className="header-title-section">
             <h2>🐱 Usuaries</h2>
@@ -77,10 +80,10 @@ function UserList() {
           </button>
         </div>
         <div className="header-stats">
-          <span className="stat-item">
+          <span className="stat-item profe">
             Profes: {users.filter((u) => u.credentials === "teacher").length}
           </span>
-          <span className="stat-item">
+          <span className="stat-item estudiante">
             Estudiantes:{" "}
             {users.filter((u) => u.credentials === "student").length}
           </span>
@@ -129,7 +132,7 @@ function UserList() {
                       {user.credentials === "teacher" ? "Profe" : "Estudiante"}
                     </span>
                   </div>
-                  <span className="item-detail">ID: {user.id}</span>
+                  <span className="item-id">ID: {user.id}</span>
                   <span className="item-detail">{user.email}</span>
                   {user.team && (
                     <span className="item-detail">🏢 {user.team}</span>

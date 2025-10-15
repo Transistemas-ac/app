@@ -15,7 +15,6 @@ const Home = () => {
             <CourseList />
           </div>
         </div>
-
         <div className="bottom-section">
           <div className="section subscriptions-section">
             <SubscriptionList />
