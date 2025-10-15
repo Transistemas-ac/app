@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.svg";
 import Power from "../assets/power.svg?react";
 import "../styles/navbar.scss";
 

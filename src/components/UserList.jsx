@@ -14,7 +14,7 @@ function UserList() {
     return (
       <div className="loading-container">
         <div className="loading-spinner pink"></div>
-        <span>Cargando usuaries...</span>
+        <span className="loading-text">Cargando usuaries...</span>
       </div>
     );
   }

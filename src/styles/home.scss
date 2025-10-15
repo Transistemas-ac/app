@@ -49,6 +49,18 @@
   @include card-shadow;
   border: 2px solid transparent;
 
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .loading-text {
+      text-align: center;
+    }
+  }
+
   &:hover {
     transform: translateY(-4px);
     @include card-shadow-hover;
